@@ -1,0 +1,45 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+.ENV/
+
+# IDE and editor settings
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and debugging files
+*.log
+*.bak
+
+# Python bytecode and coverage
+*.coverage
+.coverage.*
+.cache/
+htmlcov/
+
+# Pytest cache
+.pytest_cache/
+
+# Environment variables
+.env
+.env.*
+
+# Ignore backup files
+*~
+*.swp
+*.tmp
+*.temp
+*.orig
