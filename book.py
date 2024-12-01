@@ -2,8 +2,8 @@ class Book:
     ALLOWED_STATUSES = {"в наличии", "выдана"}
 
     def __init__(self, id: int, title: str, author: str, year: int, status: str):
-        if not isinstance(id, int):
-            raise TypeError("ID должен быть целым числом.")
+        if not isinstance(id, int) or id < 0:
+            raise ValueError("ID книги должен быть неотрицательным целым числом.")
         if not isinstance(title, str):
             raise TypeError("Название книги должно быть строкой.")
         if not isinstance(author, str):
@@ -11,7 +11,8 @@ class Book:
         if not isinstance(year, int):
             raise TypeError("Год издания должен быть целым числом.")
         if status not in self.ALLOWED_STATUSES:
-            raise ValueError(f"Недопустимый статус книги: {status}. Допустимые значения: {self.ALLOWED_STATUSES}")
+            raise ValueError(f"Недопустимый статус книги: {status}. "
+                             f"Допустимые значения: {self.ALLOWED_STATUSES}")
 
         self.id = id
         self.title = title
@@ -30,10 +31,20 @@ class Book:
 
     @staticmethod
     def from_dict(data: dict) -> "Book":
-        return Book(
-            id=data["id"],
-            title=data["title"],
-            author=data["author"],
-            year=data["year"],
-            status=data["status"]
-        )
+        try:
+            return Book(
+                id=data["id"],
+                title=data["title"],
+                author=data["author"],
+                year=data["year"],
+                status=data["status"],
+            )
+        except KeyError as e:
+            raise ValueError(f"Отсутствует необходимое поле: {e}")
+
+    def __str__(self):
+        return (f"ID: {self.id:<5} | "
+                f"Название: {self.title:<30} | "
+                f"Автор: {self.author:<20} | "
+                f"Год: {self.year:<15} | "
+                f"Статус: {self.status}")
