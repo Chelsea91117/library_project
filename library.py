@@ -46,13 +46,10 @@ class Library:
 
     # Удаление книги
     def remove_book(self, book_id: int) -> None:
-        try:
-            book = self.find_book_by_id(book_id)
-            self.books.remove(book)
-            self.save_books()
-            print(f"Книга с ID {book_id} успешно удалена!")
-        except ValueError as e:
-            print(f"Ошибка: {e}")
+        book = self.find_book_by_id(book_id)
+        self.books.remove(book)
+        self.save_books()
+        print(f"Книга с ID {book_id} успешно удалена!")
 
     # Поиск книг по названию, автору и году
     def search_books(self, query: str) -> List[Book]:
@@ -76,8 +73,7 @@ class Library:
 
         # Проверка корректности статуса
         if status not in Book.ALLOWED_STATUSES:
-            print("Ошибка: недопустимый статус. Статус должен быть 'в наличии' или 'выдана'.")
-            return False
+            raise ValueError("Ошибка: недопустимый статус. Статус должен быть 'в наличии' или 'выдана'.")
 
         # Сохранение в случае измененного статуса
         if book.status != status:
