@@ -41,7 +41,7 @@ def main():
                 book = library.add_book(title, author, year)
                 print(f"Книга добавлена: {book}")
             except ValueError:
-                print("Ошибка: Вы должны заполнить все поля.")
+                print("Ошибка: Вы должны заполнить все поля корректно.")
             sleep(3)
 
         elif choice == "4":
